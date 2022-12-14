@@ -1,0 +1,8 @@
+0,1,2,3
+url,status_code,reason,Executing_time
+https://www.sigortam.net,200,OK,time taken 1671020175.92 s
+https://www.sigortam.net/kasko-sigortasi,200,OK,time taken 1671020179.02 s
+https://www.sigortam.net/ozel-saglik-sigortasi,200,OK,time taken 1671020181.98 s
+https://www.sigortam.net/trafik-sigortasi,200,OK,time taken 1671020184.71 s
+https://www.sigortam.net/hakkimizda,200,OK,time taken 1671020187.61 s
+https://www.sigortam.net/mtv-hesaplama-ve-odeme,200,OK,time taken 1671020190.45 s

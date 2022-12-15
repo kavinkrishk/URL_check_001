@@ -9,40 +9,46 @@ error_list = []
 
 def url_check1(url,sender,receiver,password,message):
     responce = requests.get(url)
-    st_code = responce.status_code
+    sts_code = responce.status_code
     reason = responce.reason
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        if st_code == 200:
+        if sts_code == 200:
             executor.map(url_check1)
             time1 = time.time()
-            output.append([url,st_code,reason,f'time taken {time1:.2f} s'])
+            output.append([url,sts_code,reason,f'time taken {time1:.2f} s'])
 
         else:
             time1 = time.time()
             server = smtplib.SMTP('smtp.gmail.com', 587)
             server.starttls()
             server.login(sender, password)
-            server.sendmail(sender, receiver, message.format(url=url, st_code=st_code))
-            error_list.append([url, st_code, reason, f'time taken {time1:.2f} s'])
+            server.sendmail(sender, receiver, message.format(url=url, sts_code=sts_code))
+            error_list.append([url, sts_code, reason, f'time taken {time1:.2f} s'])
             print('mail sent')
 
-sender = "kavinkavinkk35@gmail.com"
-receiver = "kavinmanok1975@gmail.com"
-password = "zowthsnkiomnyjva"
+if __name__ == "__main__":
+    #print("ok")
+    sender = "kavinkavinkk35@gmail.com"
+    receiver = "kavintriplek001@gmail.com"
+    #password = "@1z@12ow!thsnkiomny12jv54a"
 
-message = '''Subject: URL Not Found
+    password = input(str("Enter the Password:"))
 
-Please check the url here.....{url} and the status_code is {st_code}
+    message = '''Subject: URL Not Found
 
-Thanks for Visiting....!!!!!'''
+    Please check the url here.....{url} and the status_code is {sts_code}
 
-df = pd.read_csv("url.csv")
-i = 0
-for url in df['0']:
-    #print(url)
-    if i<=5:
-        url_check1(url,sender,receiver,password,message)
-    i+=1
+    Thanks for Visiting....!!!!!'''
 
-print("Program Completed......!!!!!")
+    def url_add(df):
+        increment = 0
+        for url in df['0']:
+            # print(url)
+            if increment <= 5:
+                url_check1(url, sender, receiver, password, message)
+            increment += 1
+        print("Program Completed......!!!!!")
+
+    df = pd.read_csv("url.csv")
+    url_add(df)
